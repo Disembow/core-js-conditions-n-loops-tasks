@@ -274,9 +274,7 @@ function getBalanceIndex(arr) {
       tailSum += arr[k];
     }
 
-    if (headSum === tailSum) {
-      return i;
-    }
+    if (headSum === tailSum) return i;
   }
 
   return -1;
