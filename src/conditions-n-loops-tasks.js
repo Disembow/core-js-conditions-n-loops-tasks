@@ -389,9 +389,11 @@ function sortByAsc(/* arr */) {
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
 function shuffleChar(str, iterations) {
+  const hash = {};
   let result = str;
+  let maxIterations = 0;
 
-  for (let j = iterations; j > 0; j -= 1) {
+  const iterate = () => {
     let headStr = '';
     let tailStr = '';
 
@@ -401,6 +403,17 @@ function shuffleChar(str, iterations) {
     }
 
     result = headStr + tailStr;
+    maxIterations += 1;
+  };
+
+  for (let j = iterations; j > 0; j -= 1) {
+    iterate();
+    hash[maxIterations] = result;
+
+    if (result === str) {
+      result = hash[iterations % maxIterations];
+      break;
+    }
   }
 
   return result;
